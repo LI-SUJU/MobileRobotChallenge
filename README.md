@@ -6,5 +6,5 @@
 - Github: HakunaMatata2218
 - email: 
 #### Suju Li
-- Github: LI_SUJU
+- Github: LI-SUJU
 - email: s4024354@vuw.leidenuniv.nl
