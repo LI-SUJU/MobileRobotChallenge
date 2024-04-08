@@ -1,7 +1,7 @@
 # MobileRobotChallenge
 ## PiCar4WD
-[github repo](https://github.com/sunfounder/picar-4wd)
-[sunfounder instructions](https://docs.sunfounder.com/projects/picar-4wd/en/latest/)
+- [github repo](https://github.com/sunfounder/picar-4wd)
+- [sunfounder instructions](https://docs.sunfounder.com/projects/picar-4wd/en/latest/)
 #### Shan Jiang
 - Github: NicoNicoNicoNico
 - email: s.jiang.4@umail.leidenuniv.nl
