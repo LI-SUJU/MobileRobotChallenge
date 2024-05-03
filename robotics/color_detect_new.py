@@ -61,7 +61,7 @@ def analysis_image(img, contours, center_tolerance = 50) :
     """
     
     is_item_present = False
-    is_center = False
+    center_state = 0
     width_percentage = 0
     
     image_width, image_width, c = img.shape
@@ -77,36 +77,67 @@ def analysis_image(img, contours, center_tolerance = 50) :
         h = h * 4
         
         centerX = round(image_width / 2)
-        is_center = True if abs(abs(centerX - x) - abs(x + w - centerX)) < center_tolerance else False
+        if x > centerX:
+            center_state = 3
+        elif x + w < centerX:
+            center_state = 1
+        else:
+            diff = abs(abs(centerX - x) - abs(x + w - centerX))
+            if centerX - x > x + w - centerX & diff > center_tolerance:
+                center_state = 1
+            elif centerX - x < x + w - centerX & diff > center_tolerance:
+                center_state = 3
+            else:
+                center_state = 2
         
         width_percentage = w / image_width
     
     is_item_present = True if color_area_num > 0 else False
     
-    return is_item_present, is_center, width_percentage
+    return is_item_present, center_state, width_percentage
 
-# with Picamera2() as camera:
-#     print("start color detect")
+def detect_object_in_image(contours) :
+    color_area_num = len(contours) 
+    return True if color_area_num > 0 else False
 
-#     camera.preview_configuration.main.size = (640,480)
-#     camera.preview_configuration.main.format = "RGB888"
-#     camera.preview_configuration.align()
-#     camera.configure("preview")
-#     camera.start()
-
-#     while True:
-#         img = camera.capture_array() #frame.array
-#         img,img_2,img_3, contours =  color_detect(img,'red')  # Color detection function
-#         a, b, c = analysis_image(img, contours)
-#         cv2.imshow("video", img)    # OpenCV image show
-#         cv2.imshow("mask", img_2)    # OpenCV image show
-#         cv2.imshow("morphologyEx_img", img_3)    # OpenCV image show
+def check_center_state(img, contours, center_tolerance = 50):
+    # 0 = None, 1 = Left, 2 = Center, 3 = Right
+    if len(contours) == 0:
+        return 0
+    color_area_num = len(contours) 
+    image_width, image_width, c = img.shape
     
-#         k = cv2.waitKey(1) & 0xFF
-#         # 27 is the ESC key, which means that if you press the ESC key to exit
-#         if k == 27:
-#             break
+    if color_area_num > 0: 
+        x,y,w,h = cv2.boundingRect(contours[0])      # Decompose the contour into the coordinates of the upper left corner and the width and height of the recognition object
+        x = x * 4
+        y = y * 4 
+        w = w * 4
+        h = h * 4
+        
+        centerX = round(image_width / 2)
+        if x > centerX:
+            return 3
+        elif x + w < centerX:
+            return 1
+        else:
+            diff = abs(abs(centerX - x) - abs(x + w - centerX))
+            if centerX - x > x + w - centerX & diff > center_tolerance:
+                return 1
+            elif centerX - x < x + w - centerX & diff > center_tolerance:
+                return 3
+            else:
+                return 2
 
-#     print('quit ...') 
-#     cv2.destroyAllWindows()
-#     camera.close()  
+def calculate_object_percentage_in_image(img, contours) :
+    color_area_num = len(contours) 
+    image_width, image_width, c = img.shape
+    
+    if color_area_num > 0: 
+        x,y,w,h = cv2.boundingRect(contours[0])      # Decompose the contour into the coordinates of the upper left corner and the width and height of the recognition object
+        x = x * 4
+        y = y * 4 
+        w = w * 4
+        h = h * 4
+        return w / image_width
+    
+
