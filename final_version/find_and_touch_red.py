@@ -1,6 +1,6 @@
 import time
 import picar_4wd as fc
-from final_version.color_detect import analysis_image, color_detect, check_center_state
+from color_detect import analysis_image, color_detect, check_center_state
 from picamera2 import Picamera2
 import cv2
 
@@ -35,7 +35,6 @@ def turn_left():
     move("turn_left", 5)
     duration = time.time() - start_time
     movement_log.append(("turn_left", duration))
-    # movement_log.append(("turn_left", 0.1))
     stop()
 
 
@@ -45,7 +44,6 @@ def go_forward():
     move("forward", 5)
     duration = time.time() - start_time
     movement_log.append(("forward", duration))
-    # movement_log.append(("forward", 0.1))
     stop()
 
 
@@ -55,10 +53,9 @@ def turn_right():
     move("turn_right", 5)
     duration = time.time() - start_time
     movement_log.append(("turn_right", duration))
-    # movement_log.append(("turn_right", 0.1))
     stop()
 
-
+# Turn left to search for the target if it's not within view
 def move_to_touch_red():
     global movement_log
     start_time = time.time()
@@ -68,8 +65,9 @@ def move_to_touch_red():
     movement_log.append(("forward", duration))
     stop()
 
-
+# Adjust rotation based on the position of the target in the image
 def adjust_rotate(center_state):
+    # turn left if target is on the left
     if center_state == 1:
         turn_left()
     elif center_state == 3:
@@ -90,25 +88,27 @@ def rotate_move_rotate_touch():
         is_touch = False
 
         while not is_touch:
-            img = camera.capture_array()  # frame.array
+            # capture the image
+            img = camera.capture_array() 
             diff_tolerance = 50
             img, img_2, img_3, contours = color_detect(img, 'red')
-            cv2.imshow("video", img)  # OpenCV image show
-            cv2.imshow("mask", img_2)  # OpenCV image show
-            cv2.imshow("morphologyEx_img", img_3)  # OpenCV image show
+            cv2.imshow("video", img)  
+            cv2.imshow("mask", img_2) 
+            cv2.imshow("morphologyEx_img", img_3) 
 
             is_item_present, center_state, width_percentage = analysis_image(img, contours, diff_tolerance)
             print("image state", is_item_present, center_state, width_percentage)
 
             if is_item_present:
                 if width_percentage < 0.2:
+                    # If the target is far away, allow a larger tolerance when detecting the center state
                     current_state = check_center_state(img, contours, 60)
                     print("far", current_state)
                     adjust_rotate(current_state)
                 elif width_percentage > 0.7:
+                    # Assume that the target object has been touched when it occupies 70% of the field of view.
                     stop()
                     is_touch = True
-
                 else:
                     current_state = check_center_state(img, contours, 20)
                     print("close", current_state)

@@ -3,7 +3,7 @@ import sys
 import tty
 import termios
 import picar_4wd as fc
-import  final_version.find_and_touch_red as ft
+import find_and_touch_red as ft
 power_val = 5
 
 def readchar():

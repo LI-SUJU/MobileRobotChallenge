@@ -107,6 +107,7 @@ def analysis_image(img, contours, center_tolerance=50):
 
 
 def detect_object_in_image(contours):
+    # Determine whether the target is in the image. If it is, return True; otherwise, return False.
     color_area_num = len(contours)
     return True if color_area_num > 0 else False
 
