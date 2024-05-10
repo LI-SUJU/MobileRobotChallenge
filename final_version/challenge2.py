@@ -3,7 +3,7 @@ import sys
 import tty
 import termios
 import picar_4wd as fc
-import  find_and_touch_red_v2 as ft
+import  final_version.find_and_touch_red as ft
 power_val = 5
 
 def readchar():
@@ -41,12 +41,12 @@ def move(action, power_val):
 
 def stop():
     fc.stop()
-    print("停止")
+    print("stop")
 
 movement_log = []
 
 def manual_drive():
-    print("开始手动驱动，使用WASD控制机器人，按Q结束。")
+    print("Begin manual driving, use WASD to control the robot, press Q to end.")
     running = True
     while running:
         key = readkey()
@@ -64,21 +64,17 @@ def manual_drive():
             stop()
         if key == 't':
             logs = ft.rotate_move_rotate_touch()
-            # move_touch(logs)
-            navigate_home(logs)
+            navigate_home(logs) # navigate to the place where start to touch the object
             print("navigate")
-            # navigate_home()
-            navigate_home(movement_log)
+            navigate_home(movement_log) # navigate back to the origin
 
 def move_touch(logs):
-    # logs = ft.rotate_move_rotate_touch()
     movement_log.extend(logs)
     print("touch logs", logs)
 
 
-
 def navigate_home(logs):
-    print("导航回原点...")
+    print("Navigating back to the origin...")
     reverse_commands = {
         'forward': 'backward',
         'backward': 'forward',
@@ -91,22 +87,6 @@ def navigate_home(logs):
         time.sleep(duration)
     stop()
 
-
-# def navigate_home(logs):
-#     print("导航回原点...")
-#     reverse_commands = {
-#         'forward': 'backward',
-#         'backward': 'forward',
-#         'turn_left': 'turn_right',
-#         'turn_right': 'turn_left'
-#     }
-#     while movement_log:
-#         action1, duration1 = movement_log.pop()
-#         move(reverse_commands[action1], power_val)
-#         time.sleep(duration1)
-#     stop()
-
-# 主逻辑
 manual_drive()
 
 

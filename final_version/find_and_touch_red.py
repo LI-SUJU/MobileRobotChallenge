@@ -1,6 +1,6 @@
 import time
 import picar_4wd as fc
-from color_detect_new import analysis_image, color_detect, check_center_state
+from final_version.color_detect import analysis_image, color_detect, check_center_state
 from picamera2 import Picamera2
 import cv2
 
