@@ -28,6 +28,7 @@ def readkey(getchar_fn=None):
     return chr(0x10 + ord(c3) - 65)
 
 def move(action, power_val):
+    # Move the robot in the specified direction with the given power
     if action == "forward":
         fc.forward(power_val)
     elif action == "backward":
@@ -43,17 +44,21 @@ def stop():
     fc.stop()
     print("stop")
 
+# List to log movements and their durations
 movement_log = []
 
 def manual_drive():
+    # Function to manually drive the robot using WASD keys
     print("Begin manual driving, use WASD to control the robot, press Q to end.")
     running = True
     while running:
         key = readkey()
         if key == 'q':
+            # If 'q' is pressed, navigate home and stop running
             navigate_home()
             running = False
         elif key in ['w', 's', 'a', 'd']:
+            # Map WASD keys to actions
             action = {'w': 'forward', 's': 'backward', 'a': 'turn_left', 'd': 'turn_right'}[key]
             start_time = time.time()
             move(action, power_val)
@@ -63,6 +68,7 @@ def manual_drive():
             movement_log.append((action, duration))
             stop()
         if key == 't':
+            # If 't' is pressed, initiate the find and touch red object routine
             logs = ft.rotate_move_rotate_touch()
             navigate_home(logs) # navigate to the place where start to touch the object
             print("navigate")
@@ -74,6 +80,7 @@ def move_touch(logs):
 
 
 def navigate_home(logs):
+    # Extend the movement log with new logs
     print("Navigating back to the origin...")
     reverse_commands = {
         'forward': 'backward',
@@ -82,11 +89,13 @@ def navigate_home(logs):
         'turn_right': 'turn_left'
     }
     while logs:
+        # Function to navigate back to the origin by reversing logged movements
         action, duration = logs.pop()
         move(reverse_commands[action], power_val)
         time.sleep(duration)
     stop()
-
+    
+# Start manual driving mode
 manual_drive()
 
 
