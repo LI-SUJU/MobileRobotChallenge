@@ -29,4 +29,3 @@ Press `Q` to end control.
 #### Suju Li
 - Github: LI-SUJU
 - email: s4024354@vuw.leidenuniv.nl
-- call: ‪+31 6 85838237‬
