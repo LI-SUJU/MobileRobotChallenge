@@ -7,7 +7,7 @@ import picar_4wd as fc
 power_val = 5
 
 def readchar():
-    # 
+    # Read a single character from standard input 
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
@@ -18,6 +18,7 @@ def readchar():
     return ch
 
 def readkey(getchar_fn=None):
+    # Read a key press and handle special keys (arrows)
     getchar = getchar_fn or readchar
     c1 = getchar()
     if ord(c1) != 0x1b:
@@ -29,6 +30,7 @@ def readkey(getchar_fn=None):
     return chr(0x10 + ord(c3) - 65)
 
 def move(action, power_val):
+    # Move the robot in the specified direction with the given power
     if action == "forward":
         fc.forward(power_val)
     elif action == "backward":
@@ -41,12 +43,15 @@ def move(action, power_val):
         fc.stop()
 
 def stop():
+    # Stop the robot and print "stop"
     fc.stop()
     print("stop")
 
+# List to log movements and their durations
 movement_log = []
 
 def manual_drive():
+    # Function to manually drive the robot using WASD keys
     print("Begin manual driving, use WASD to control the robot, press Q to end.")
     running = True
     while running:
@@ -64,6 +69,7 @@ def manual_drive():
             stop()
 
 def navigate_home():
+    # Function to navigate back to the origin by reversing logged movements
     print("Navigating back to the origin...")
     reverse_commands = {
         'forward': 'backward',
@@ -77,5 +83,7 @@ def navigate_home():
         time.sleep(duration)
     stop()
 
+# Start manual driving mode
 manual_drive()
+# Navigate back to the starting point
 navigate_home()
