@@ -18,14 +18,3 @@ Press `T` to detect and touch the target, then the robot will automatically retu
 Press `Q` to end control.  
 
 ### Please find the test videos [here](https://github.com/LI-SUJU/MobileRobotChallenge/tree/main/videos).
-
-### Contact us:
-#### Shan Jiang
-- Github: NicoNicoNicoNico
-- email: s.jiang.4@umail.leidenuniv.nl
-#### Jiayi Wu
-- Github: HakunaMatata2218
-- email: 
-#### Suju Li
-- Github: LI-SUJU
-- email: s4024354@vuw.leidenuniv.nl
