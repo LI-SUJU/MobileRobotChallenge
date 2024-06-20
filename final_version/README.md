@@ -1,3 +1,9 @@
+# Dependence
+
+- CV2
+- numpy
+
+
 #Challenge 1:
 
 Run `python3 challenge1.py` in the terminal to start.
