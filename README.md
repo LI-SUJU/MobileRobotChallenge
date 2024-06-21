@@ -1,4 +1,5 @@
-# MobileRobotChallenge
+# 2024 Robotics Assignment Mobile Robot Challenge
+### Team RoboRover: Suju Li Shan Jiang Jiayi Wu
 ### Dependence
 
 - CV2
@@ -19,10 +20,6 @@ Press `Q` to end control.
 
 ### Please find the test videos [here](https://github.com/LI-SUJU/MobileRobotChallenge/tree/main/videos).
 ### Please find a nicely formatted report [here](https://github.com/LI-SUJU/MobileRobotChallenge/blob/main/Robotics2024_Final_Project_by_RoboRover/Mobile_Robot_Challenge_by_RoboRover.pdf)
-
-# 2024 Robotics Assignment Mobile Robot Challenge
-
-Team RoboRover: Suju Li Shan Jiang Jiayi Wu
 
 ## Abstract
 
