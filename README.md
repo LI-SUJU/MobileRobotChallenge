@@ -1,5 +1,5 @@
 # 2024 Robotics Assignment Mobile Robot Challenge
-### Team RoboRover: Suju Li Shan Jiang Jiayi Wu
+### Team RoboRover: Suju Li, Shan Jiang, Jiayi Wu
 ### Dependence
 
 - CV2
