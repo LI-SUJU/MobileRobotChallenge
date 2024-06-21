@@ -19,7 +19,7 @@ Press `T` to detect and touch the target, then the robot will automatically retu
 Press `Q` to end control.  
 
 ### Please find the test videos [here](https://github.com/LI-SUJU/MobileRobotChallenge/tree/main/videos).
-### Please find a nicely formatted report [here](https://github.com/LI-SUJU/MobileRobotChallenge/blob/main/Robotics2024_Final_Project_by_RoboRover/Mobile_Robot_Challenge_by_RoboRover.pdf)
+### Please find a nicely formatted report [here](https://github.com/LI-SUJU/MobileRobotChallenge/blob/main/Robotics2024_Final_Project_by_RoboRover/Mobile_Robot_Challenge_by_RoboRover.pdf).
 
 ## Abstract
 
